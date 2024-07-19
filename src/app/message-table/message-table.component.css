@@ -1,6 +1,11 @@
 .message-table {
     margin-top: 30px;
 
+    .comment-title-class {
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+
     table {
         border-collapse: separate;
         border-spacing: 0;

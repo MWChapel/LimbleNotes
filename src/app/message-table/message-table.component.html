@@ -1,5 +1,5 @@
 <div class="message-table">
-    <div>
+    <div class="comment-title-class">
         Comments:
     </div>
     <table>
@@ -7,9 +7,9 @@
             <ng-container *ngFor="let message of messageContent; index as i">
                 <tr>
                     <td id="message-body-{{i+1}}" scope="row">
-                        <fa-icon class="icon-class"[icon]="faComment"></fa-icon>
+                        <fa-icon class="icon-class" [icon]="faComment"></fa-icon>
                         <span *ngIf="message.userName" class="name-class"><b>{{message.userName}}</b></span>
-                        <span>
+                        <span class="message-body-class">
                             {{message.body}}  
                         </span>
                     </td>
