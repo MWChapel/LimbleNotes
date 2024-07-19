@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { MessageHistoryService } from './services/message-history.service';
+import { NotificationService } from './services/notification.service';
 
 import { MessageTableModule } from './message-table/message-table.module';
 import { AddCommentModule } from './add-comment/add-comment.module';
@@ -20,33 +21,21 @@ import { IMessageContent } from './shared/interfaces';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, MessageTableModule, AddCommentModule],
-  providers: [MessageHistoryService],
+  providers: [MessageHistoryService, NotificationService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
 
   constructor(
-    private messageHistoryService: MessageHistoryService
+    private messageHistoryService: MessageHistoryService,
+    private notificationService: NotificationService
   ) {}
 
   //Set the title
   title = 'Limble Test';
   // Fetch the existing messages
   messages: IMessageContent[] = this.messageHistoryService.getHistory() || [];
-
-  /**
-   * userCallback is used to contact the @user when it's called
-   *
-   * @param {IUserList} user
-   * @param {string} message
-   * @memberof AppComponent
-   */
-  userCallback(user: IUserList, message: string) {
-    setTimeout(function(){
-      alert(`Calling User: ID:${user.userID} Name:${user.name} Message:${message}`);
-    }, 1000);
-  }
 
   /**
    * addMessage adds a message to the message list
@@ -62,7 +51,7 @@ export class AppComponent {
     if(user) {
       incomingMessage = incomingMessage.replace(`@${user}`, '');
       // call the user callback to simulate a message to the @user
-      this.userCallback({name:  message.userName, userID: message.userID }, incomingMessage)
+      this.notificationService.notifyUser({name:  message.userName, userID: message.userID }, incomingMessage)
     }
     // push the new message to the list of messages
     this.messages.push({
