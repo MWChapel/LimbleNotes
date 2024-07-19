@@ -3,7 +3,7 @@
         <input type="text" #userInput [value]="inputValue" [disabled]="inputDisabled" class="add-comment-input" (keyup.enter)="submitMessage()"
          (input)="updateMessage($event)">
         <button [disabled]="!inputValue" id="submit-comment-btn" class="submit-comment-btn" (click)="submitMessage()">
-            Submit Message
+            Submit Comment
         </button>
         <button id="cancel-comment-btn"class="cancel-comment-btn" (click)="cancel()">
             Cancel
