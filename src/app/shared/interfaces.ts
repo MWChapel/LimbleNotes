@@ -1,6 +1,6 @@
 export interface IMessageContent {
-    body?: string;
-    date?: string;
+    body: string;
+    date: string;
     userName?: string;
 }
 
