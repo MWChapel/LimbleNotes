@@ -16,8 +16,13 @@
         padding: 10px;
     }
 
+    .user-item:focus {
+        outline: none !important;
+        background-color:aliceblue;
+    }
+
     .user-item:hover {
-        background-color:gainsboro;
+        background-color:aliceblue;
     }
 
     .user-icon {

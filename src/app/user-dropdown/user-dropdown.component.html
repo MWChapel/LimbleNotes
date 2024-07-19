@@ -1,5 +1,5 @@
 <div class="user-dropdown">
-    <li class="user-item" *ngFor="let user of users" (click)="selectItem(user)">
+    <li #list class="user-item" *ngFor="let user of users" #listItems tabindex="-1" (click)="selectItem(user)">
         <fa-icon class="user-icon" [icon]="faUser"></fa-icon>
         {{user.name}}
     </li>

@@ -61,6 +61,9 @@ export class AddCommentComponent {
    * @memberof AddCommentComponent
    */
   submitMessage(): void {
+    //ignore return submit on an empty message
+    if(!this.inputValue) return;
+    
     // Callback emitter to set the new message
     this.addMessage.emit(
       {

@@ -1,6 +1,6 @@
 <div class="add-comment">
     <div class="add-comment-container" *ngIf="showInput">
-        <input type="text" #userInput [value]="inputValue" [disabled]="inputDisabled" class="add-comment-input" (keyup.enter)="submitMessage()"
+        <input type="text" #userInput [value]="inputValue" [disabled]="inputDisabled" class="add-comment-input" (keydown.enter)="submitMessage()"
          (input)="updateMessage($event)" aria-label="Comment Input">
         <button [disabled]="!inputValue" id="submit-comment-btn" class="submit-comment-btn" (click)="submitMessage()">
             Submit Comment
