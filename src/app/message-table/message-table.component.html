@@ -1,0 +1,21 @@
+<div class="message-table">
+    <div>
+        Comments:
+    </div>
+    <table>
+        <tbody>
+            <ng-container *ngFor="let message of messageContent; index as i">
+                <tr>
+                    <td id="message-body-{{i+1}}" scope="row">
+                        <fa-icon class="icon-class"[icon]="faComment"></fa-icon>
+                        <span *ngIf="message.userName" class="name-class"><b>{{message.userName}}</b></span>
+                        <span>
+                            {{message.body}}  
+                        </span>
+                    </td>
+                    <td class="date-class" id="message-date-{{i+1}}" scope="row">{{message.date}}</td>
+                </tr>  
+            </ng-container>         
+        </tbody>
+    </table>
+</div>

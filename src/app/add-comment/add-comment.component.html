@@ -1,0 +1,23 @@
+<div class="add-comment">
+    <div class="add-comment-container" *ngIf="showInput">
+        <input type="text" #userInput [value]="inputValue" [disabled]="inputDisabled" class="add-comment-input" (keyup.enter)="submitMessage()"
+         (input)="updateMessage($event)">
+        <button [disabled]="!inputValue" id="submit-comment-btn" class="submit-comment-btn" (click)="submitMessage()">
+            Submit Message
+        </button>
+        <button id="cancel-comment-btn"class="cancel-comment-btn" (click)="cancel()">
+            Cancel
+        </button>
+    </div>
+    <div class="add-comment-btn-container">
+        <button id="add-comment-btn" class="add-comment-btn" (click)="openEditer()">
+            <fa-icon [icon]="faComment"></fa-icon>
+            /
+            <fa-icon [icon]="faCamera"></fa-icon>
+            Add Comment
+        </button>
+    </div>
+    <div *ngIf="inputDisabled">
+        <user-dropdown [users]="userValues" (selectUser)="addUser($event)"></user-dropdown>
+    </div>
+</div>

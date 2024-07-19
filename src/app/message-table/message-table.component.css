@@ -1,0 +1,31 @@
+.message-table {
+    margin-top: 30px;
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        font-family: sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        width: 100%;
+        position: relative;
+      }
+
+      td {
+        border-bottom: 1px solid lightgrey;
+        padding: 15px 10px;
+      }
+}
+
+.date-class {
+  text-align: right;
+  color:darkgray
+}
+
+.name-class {
+  padding-left: 5px;
+}
+
+.icon-class {
+  padding-right:10px;
+}
