@@ -14,6 +14,7 @@
     .user-item {
         display: flex;
         padding: 10px;
+        align-items: center;
     }
 
     .user-item:focus {
@@ -26,6 +27,10 @@
     }
 
     .user-icon {
-        margin-right: 10px;
+        display: inline-block;
+        border-radius: 60px;
+        box-shadow: 0 0 2px #888;
+        padding: 0.5em 0.6em;
+        margin-right: 15px;
     }
 }

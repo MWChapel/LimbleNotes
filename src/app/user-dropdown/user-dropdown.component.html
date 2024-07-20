@@ -1,6 +1,6 @@
 <div class="user-dropdown">
     <li #list class="user-item" *ngFor="let user of users" #listItems tabindex="-1" (click)="selectItem(user)">
-        <fa-icon class="user-icon" [icon]="faUser"></fa-icon>
+        <span class="user-icon"><fa-icon [icon]="faUser"></fa-icon></span>
         {{user.name}}
     </li>
 </div>
