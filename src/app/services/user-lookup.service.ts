@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IUserList } from '../shared/interfaces';
 
 /**
    * UserLookupService
@@ -11,10 +12,10 @@ export class UserLookupService {
   /**
    * getUsers returns a static test list of users
    *
-   * @return {*}  {{ userID: number, name: string }[]}
+   * @return {*}  IUserList[]
    * @memberof UserLookupService
    */
-  getUsers(): { userID: number, name: string }[] {
+  getUsers(): IUserList[] {
     return [
       {'userID' : 1, 'name' : 'Kevin'},
       {'userID' : 2, 'name' : 'Jeff'},
