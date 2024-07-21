@@ -42,7 +42,13 @@
     }
 
     .add-comment-input {
+        border-radius: 5px;
+        border: 1px solid lightgrey;
         width: 100%;
         padding: 5px;
+    }
+
+    .add-comment-input:focus {
+        outline: 1px solid lightskyblue;
     }
 }
