@@ -3,10 +3,10 @@
         <h1>{{title}}</h1>
     </div>
     <div>
-        <message-table [messageContent]="messages" />
+        <app-message-table [messageContent]="messages" />
     </div>
     <div>
-        <add-comment (addMessage)="addMessage($event)"/>
+        <app-add-comment (addMessage)="addMessage($event)"/>
     </div>
 </div>
 

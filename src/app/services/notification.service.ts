@@ -9,8 +9,6 @@ import { IUserList } from '../shared/interfaces';
    */
 @Injectable()
 export class NotificationService {
-  constructor() {}
-
   /**
    * notifyUser is used to contact the @user when it's called
    *

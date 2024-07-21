@@ -8,8 +8,6 @@ import { Injectable } from '@angular/core';
    */
 @Injectable()
 export class UserLookupService {
-  constructor() {}
-
   /**
    * getUsers returns a static test list of users
    *

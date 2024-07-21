@@ -13,7 +13,7 @@ import { IUserMessage } from '../shared/interfaces';
  */
 @Component({
   providers: [UserLookupService],
-  selector: 'add-comment',
+  selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
   styleUrls: [ './add-comment.component.css' ]
 })
@@ -37,9 +37,9 @@ export class AddCommentComponent {
   showInput = false;
   inputDisabled = false;
   userValues: IUserList[] = [];
-  inputValue: string = '';
-  atUserName: string = '';
-  atUserID: number = 0;
+  inputValue = '';
+  atUserName = '';
+  atUserID = 0;
 
   /**
    * openEditer open the input field and the submit and cancel buttons
@@ -114,8 +114,8 @@ export class AddCommentComponent {
    * @param {*} event
    * @memberof AddCommentComponent
    */
-  updateMessage(event: any): void {  
-    this.inputValue = event.target.value;
+  updateMessage(event: Event ): void {  
+    this.inputValue = (event.target as HTMLInputElement).value;
     if(this.inputValue === '@') {
       this.inputDisabled = true;
       this.userValues = this.userLookupService.getUsers();

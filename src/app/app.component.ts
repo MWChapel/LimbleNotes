@@ -7,7 +7,6 @@ import { NotificationService } from './services/notification.service';
 
 import { MessageTableModule } from './message-table/message-table.module';
 import { AddCommentModule } from './add-comment/add-comment.module';
-import { IUserList } from './shared/interfaces';
 import { IUserMessage } from './shared/interfaces';
 import { IMessageContent } from './shared/interfaces';
 

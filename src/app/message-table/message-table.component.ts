@@ -8,7 +8,7 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
  * @class MessageTableComponent
  */
 @Component({
-  selector: 'message-table',
+  selector: 'app-message-table',
   templateUrl: './message-table.component.html',
   styleUrls: [ './message-table.component.css' ]
 })

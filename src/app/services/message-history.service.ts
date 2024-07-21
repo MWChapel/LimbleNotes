@@ -9,8 +9,6 @@ import { IMessageContent } from '../shared/interfaces';
    */
 @Injectable()
 export class MessageHistoryService {
-  constructor() {}
-
   /**
    * getHistory returns the default test message history
    *

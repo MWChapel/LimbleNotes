@@ -18,6 +18,6 @@
         </button>
     </div>
     <div *ngIf="inputDisabled">
-        <user-dropdown [users]="userValues" (selectUser)="addUser($event)"></user-dropdown>
+        <app-user-dropdown [users]="userValues" (selectUser)="addUser($event)"></app-user-dropdown>
     </div>
 </div>
