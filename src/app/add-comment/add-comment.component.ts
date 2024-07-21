@@ -116,9 +116,17 @@ export class AddCommentComponent {
    */
   updateMessage(event: Event ): void {  
     this.inputValue = (event.target as HTMLInputElement).value;
+
+    // check to see if the first character is a @ trigger
     if(this.inputValue === '@') {
       this.inputDisabled = true;
       this.userValues = this.userLookupService.getUsers();
-    } 
+    }
+
+    // Check to see if the user ID was cleared out and clean out the user metadata
+    if(!this.inputValue.includes(`@${this.atUserName}`)) {
+      this.atUserName = '';
+      this.atUserID = 0;
+    }
   }
 }
