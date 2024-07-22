@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener } from '@angular/core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { IUserList } from '../shared/interfaces';
 
@@ -36,8 +36,16 @@ export class UserDropdownComponent implements AfterViewInit {
     }
   }
   
-  constructor() {
+  constructor(private menuRef: ElementRef) {
     this.selectUser = new EventEmitter();
+  }
+
+  // If click anywhere outside the menu, close the menu
+  @HostListener('document:click', ['$event'])
+  clickout(event: MouseEvent) {
+    if(!this.menuRef.nativeElement.contains(event.target)) {
+      this.selectUser.emit();
+    }
   }
 
   /**
@@ -71,6 +79,11 @@ export class UserDropdownComponent implements AfterViewInit {
     // Submit the active selection
     if(event.key === 'Enter') {
       this.onClick(this.users[this.activeIndex])
+    }
+
+    // Escape to cancel
+    if(event.key === 'Escape') {
+      this.selectUser.emit();
     }
 
     // Stop any key propagation

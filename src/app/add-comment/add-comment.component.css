@@ -51,4 +51,8 @@
     .add-comment-input:focus {
         outline: 1px solid lightskyblue;
     }
+
+    .user-dropdown-container {
+        width: 400px;
+    }
 }

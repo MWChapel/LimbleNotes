@@ -1,8 +1,8 @@
 <div class="add-comment">
     <div class="add-comment-container" *ngIf="showInput">
-        <input type="text" #userInput [value]="inputValue" [disabled]="inputDisabled" class="add-comment-input" (keydown.enter)="submitMessage()"
+        <input type="text" #userInput [value]="inputValue" class="add-comment-input" (keydown.enter)="submitMessage()"
          (input)="updateMessage($event)" aria-label="Comment Input">
-        <button [disabled]="!inputValue" id="submit-comment-btn" class="submit-comment-btn" (click)="submitMessage()">
+        <button [disabled]="!inputValue || submitDisabled" id="submit-comment-btn" class="submit-comment-btn" (click)="submitMessage()">
             Submit Comment
         </button>
         <button id="cancel-comment-btn"class="cancel-comment-btn" (click)="cancel()">
@@ -17,7 +17,7 @@
             Add Comment
         </button>
     </div>
-    <div *ngIf="inputDisabled">
+    <div class="user-dropdown-container" *ngIf="submitDisabled">
         <app-user-dropdown [users]="userValues" (selectUser)="addUser($event)"></app-user-dropdown>
     </div>
 </div>

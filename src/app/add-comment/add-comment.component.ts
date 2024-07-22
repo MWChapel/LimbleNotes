@@ -35,7 +35,7 @@ export class AddCommentComponent {
   faComment = faComment;
   faCamera = faCamera;
   showInput = false;
-  inputDisabled = false;
+  submitDisabled = false;
   userValues: IUserList[] = [];
   inputValue = '';
   atUserName = '';
@@ -88,7 +88,7 @@ export class AddCommentComponent {
    */
   cancel(): void {
     this.showInput = false;
-    this.inputDisabled = false;
+    this.submitDisabled = false;
   }
 
   /**
@@ -98,10 +98,15 @@ export class AddCommentComponent {
    * @memberof AddCommentComponent
    */
   addUser(user: IUserList): void {
-    this.inputValue = `@${user.name} `
-    this.atUserName = user.name;
-    this.atUserID = user.userID;
-    this.inputDisabled = false;
+    if(user && user.name) {
+      this.inputValue = `@${user.name} `
+      this.atUserName = user.name;
+      this.atUserID = user.userID;
+    } else {
+      this.inputValue = '';
+    }
+
+    this.submitDisabled = false;
     // Focus on the message input
     setTimeout(()=>{
       this.inputElement?.nativeElement.focus();
@@ -119,7 +124,7 @@ export class AddCommentComponent {
 
     // check to see if the first character is a @ trigger
     if(this.inputValue === '@') {
-      this.inputDisabled = true;
+      this.submitDisabled = true;
       this.userValues = this.userLookupService.getUsers();
     }
 
