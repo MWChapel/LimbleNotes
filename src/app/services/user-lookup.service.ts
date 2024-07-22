@@ -21,6 +21,10 @@ export class UserLookupService {
       {'userID' : 2, 'name' : 'Jeff'},
       {'userID' : 3, 'name' : 'Bryan'},
       {'userID' : 4, 'name' : 'Gabbey'},
+      {'userID' : 5, 'name' : 'Mike'},
+      {'userID' : 6, 'name' : 'Bob'},
+      {'userID' : 7, 'name' : 'Joe'},
+      {'userID' : 8, 'name' : 'Mark'},
     ]
   }
 } 
