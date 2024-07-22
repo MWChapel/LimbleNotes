@@ -2,12 +2,12 @@
     font-family: sans-serif;
     font-size: 0.8rem;
     width: 400px;
-    max-height: 300px;
+    max-height: 200px;
     overflow: scroll;
     border: 1px solid lightslategray;
     border-radius: 5px;
     position: relative;
-    margin-top: -8px;
+    margin-top: -250px;
     background-color:white;
     box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.19);
     padding: 0;
