@@ -9,6 +9,7 @@ import { MessageTableModule } from './message-table/message-table.module';
 import { AddCommentModule } from './add-comment/add-comment.module';
 import { IUserMessage } from './shared/interfaces';
 import { IMessageContent } from './shared/interfaces';
+import { IUserList } from './shared/interfaces';
 
 /**
  * AppComponent
@@ -44,19 +45,22 @@ export class AppComponent {
    */
   addMessage(message: IUserMessage): void {
     // check for a @user here, to format the message
-    const user = message.userName;
+    const users: IUserList[] = message.users || [];
     let incomingMessage = message.message;
-    // if @user is set, remove the user ID and format it seprately
-    if(user) {
-      incomingMessage = incomingMessage.replace(`@${user}`, '');
-      // call the user callback to simulate a message to the @user
-      this.notificationService.notifyUser({name:  message.userName, userID: message.userID }, incomingMessage)
-    }
+    // Send a notification to each user
+    users.forEach((user) => {
+      if(incomingMessage.includes(`@${user.name}`)) {
+        this.notificationService.notifyUser({name:  user.name, userID:  user.userID }, incomingMessage);
+      }
+    })
+    // Update the message to show metadata
+    users.forEach((user) => {
+      incomingMessage = incomingMessage.replace(`@${user.name}`, `<strong>@${user.name}</strong>`);
+    })
     // push the new message to the list of messages
     this.messages.push({
       body: incomingMessage,
       date: `System - ${new Date().toLocaleString()}`,
-      userName: user ? `@${user}` : ''
     })
   }
 }

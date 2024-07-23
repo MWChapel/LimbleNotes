@@ -10,7 +10,6 @@ export interface IUserList {
 }
 
 export interface IUserMessage {
-    userName:string;
-    userID: number;
+    users: IUserList[]
     message:string;
 }

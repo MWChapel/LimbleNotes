@@ -8,10 +8,7 @@
                 <tr>
                     <td id="message-body-{{i+1}}">
                         <fa-icon class="icon-class" [icon]="faComment"></fa-icon>
-                        <span *ngIf="message.userName" class="name-class"><b>{{message.userName}}</b></span>
-                        <span class="message-body-class">
-                            {{message.body}}  
-                        </span>
+                        <span class="message-body-class" [innerHTML]="message.body"></span>
                     </td>
                     <td class="date-class" id="message-date-{{i+1}}">{{message.date}}</td>
                 </tr>  

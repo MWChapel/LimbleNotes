@@ -36,10 +36,11 @@ export class AddCommentComponent {
   faCamera = faCamera;
   showInput = false;
   submitDisabled = false;
+
   userValues: IUserList[] = [];
+  atUsers: IUserList[] = [];
+  
   inputValue = '';
-  atUserName = '';
-  atUserID = 0;
 
   /**
    * openEditer open the input field and the submit and cancel buttons
@@ -67,14 +68,12 @@ export class AddCommentComponent {
     // Callback emitter to set the new message
     this.addMessage.emit(
       {
-        userName: this.atUserName,
-        userID: this.atUserID,
+        users: this.atUsers,
         message: this.inputValue
       }
     )
     this.inputValue = '';
-    this.atUserID = 0;
-    this.atUserName = '';
+    this.atUsers = [];
     // Focus on the message input
     setTimeout(()=>{
       this.inputElement?.nativeElement.focus();
@@ -99,11 +98,14 @@ export class AddCommentComponent {
    */
   addUser(user: IUserList): void {
     if(user && user.name) {
-      this.inputValue = `@${user.name} `
-      this.atUserName = user.name;
-      this.atUserID = user.userID;
+      this.inputValue = `${this.inputValue}${user.name}`
+      this.atUsers.push({
+        name: user.name,
+        userID: user.userID
+      })
     } else {
-      this.inputValue = '';
+      //Remove the @ from th input if close the dropdown
+      this.inputValue = this.inputValue.slice(0, -1);
     }
 
     this.submitDisabled = false;
@@ -114,7 +116,7 @@ export class AddCommentComponent {
   }
 
   /**
-   * updateMessage updates the message as the user types
+   * updateMessage updates the message and trigger dropdown if includes @ symbol
    *
    * @param {*} event
    * @memberof AddCommentComponent
@@ -122,16 +124,10 @@ export class AddCommentComponent {
   updateMessage(event: Event ): void {  
     this.inputValue = (event.target as HTMLInputElement).value;
 
-    // check to see if the first character is a @ trigger
-    if(this.inputValue === '@') {
+    // check to see if the last character is a @ trigger
+    if(this.inputValue === '@' || this.inputValue.endsWith(' @')) {
       this.submitDisabled = true;
       this.userValues = this.userLookupService.getUsers();
-    }
-
-    // Check to see if the user ID was cleared out and clean out the user metadata
-    if(!this.inputValue.includes(`@${this.atUserName}`)) {
-      this.atUserName = '';
-      this.atUserID = 0;
     }
   }
 }

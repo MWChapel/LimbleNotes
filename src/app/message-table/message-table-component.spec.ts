@@ -40,15 +40,13 @@ describe('MessageTableComponent', () => {
     const app = fixture.componentInstance;
     app.messageContent = [
       {
-          "body": "This Task was assigned to Daryl Babb",
-          "userName": "@Kevin",
+          "body": "@Kevin This Task was assigned to Daryl Babb",
           "date": "System - 7/18/2024, 9:00:00 AM"
       }
   ];
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.message-body-class')?.textContent).toContain('This Task was assigned to Daryl Babb');
-    expect(compiled.querySelector('.name-class')?.textContent).toContain('@Kevin');
+    expect(compiled.querySelector('.message-body-class')?.textContent).toContain('@Kevin This Task was assigned to Daryl Babb');
     expect(compiled.querySelector('.date-class')?.textContent).toContain('System - 7/18/2024, 9:00:00 AM');
   });
   
