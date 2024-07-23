@@ -46,21 +46,13 @@ export class AppComponent {
   addMessage(message: IUserMessage): void {
     // check for a @user here, to format the message
     const users: IUserList[] = message.users || [];
-    let incomingMessage = message.message;
+    const incomingMessage = message.message;
     // Send a notification to each user
     users.forEach((user) => {
       if(incomingMessage.includes(`@${user.name}`)) {
         this.notificationService.notifyUser({name:  user.name, userID:  user.userID }, incomingMessage);
       }
     })
-    // Update the message to show metadata
-    users.forEach((user) => {
-      incomingMessage = incomingMessage.replace(`@${user.name}`, `<strong>@${user.name}</strong>`);
-    })
-    // push the new message to the list of messages
-    this.messages.push({
-      body: incomingMessage,
-      date: `System - ${new Date().toLocaleString()}`,
-    })
+    this.messages = this.messageHistoryService.addMessage(message);
   }
 }
