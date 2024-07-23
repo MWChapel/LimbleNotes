@@ -39,7 +39,7 @@ export class AddCommentComponent {
 
   userValues: IUserList[] = [];
   atUsers: IUserList[] = [];
-  
+
   inputValue = '';
 
   /**
@@ -99,12 +99,16 @@ export class AddCommentComponent {
   addUser(user: IUserList): void {
     if(user && user.name) {
       this.inputValue = `${this.inputValue}${user.name}`
-      this.atUsers.push({
-        name: user.name,
-        userID: user.userID
-      })
+
+      // If the user list doesn't already include this user, add it to the array
+      if(!this.atUsers.find(testUser => testUser.name === user.name)) {
+        this.atUsers.push({
+          name: user.name,
+          userID: user.userID
+        })
+      }
     } else {
-      //Remove the @ from th input if close the dropdown
+      //Remove the @ from the input if the user closes the dropdown before picking a user
       this.inputValue = this.inputValue.slice(0, -1);
     }
 

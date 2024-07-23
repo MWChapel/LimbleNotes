@@ -47,7 +47,7 @@ export class MessageHistoryService {
     let incomingMessage = message.message;
     // Update the message to show metadata
     users.forEach((user) => {
-      incomingMessage = incomingMessage.replace(`@${user.name}`, `<strong>@${user.name}</strong>`);
+      incomingMessage = incomingMessage.replaceAll(`@${user.name}`, `<strong>@${user.name}</strong>`);
     })
     // push the new message to the list of messages
     this.messages.push({
