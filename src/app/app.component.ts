@@ -48,11 +48,13 @@ export class AppComponent {
     const users: IUserList[] = message.users || [];
     const incomingMessage = message.message;
     // Send a notification to each user
+    const setUsers: string[] = [];
     users.forEach((user) => {
       if(incomingMessage.includes(`@${user.name}`)) {
-        this.notificationService.notifyUser({name:  user.name, userID:  user.userID }, incomingMessage);
+        setUsers.push(user.name)
       }
     })
+    this.notificationService.notifyUser(setUsers, incomingMessage);
     this.messages = this.messageHistoryService.addMessage(message);
   }
 }

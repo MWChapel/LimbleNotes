@@ -1,6 +1,9 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <ul class="user-dropdown">
-    <li #list class="user-item" *ngFor="let user of users" #listItems tabindex="-1" (keydown)="onKeydown($event)" (click)="onClick(user)">
-        <span class="user-icon"><fa-icon [icon]="faUser"></fa-icon></span>
-        {{user.name}}
-    </li>
+    <ng-container *ngFor="let user of users" #listItems tabindex="-1" >
+        <li #list class="user-item" *ngIf="query ? user.name.startsWith(query): true" (keydown)="onKeydown($event)" (click)="onClick(user)">
+            <span class="user-icon"><fa-icon [icon]="faUser"></fa-icon></span>
+            {{user.name}}
+        </li>
+    </ng-container>
 </ul>

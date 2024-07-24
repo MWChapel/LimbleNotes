@@ -36,11 +36,46 @@ export class AddCommentComponent {
   faCamera = faCamera;
   showInput = false;
   submitDisabled = false;
+  viewDrop = false;
 
   userValues: IUserList[] = [];
   atUsers: IUserList[] = [];
 
   inputValue = '';
+  tokenValue: string[] = [];
+  query = '';
+
+  /**
+   * checkValue takes the input value an checks if there is a new @ symbol
+   *
+   * @memberof AddCommentComponent
+   */
+  _checkValue(): void {
+    // Tokenize current value
+    let found = false;
+    this.tokenValue = this.inputValue.split(' ');
+    this.userValues = this.userLookupService.getUsers();
+    this.tokenValue.forEach((token) => {
+      const newUser = this.userValues.find(testUser => testUser.name ===  token.substring(1));
+      if(token.startsWith("@") && !newUser && this.userValues.find(testUser => testUser.name.startsWith(token.substring(1)))) {
+        found = true;
+        this.query = token.substring(1)
+      } else if(token.startsWith("@") && newUser && !this.atUsers.find(testUser => testUser.name === newUser.name)) {
+        this.atUsers.push({
+          name: newUser.name,
+          userID: newUser.userID
+        })
+        found = false;
+      }
+    })
+    // Open the drop down query
+    if(found) {
+      this.viewDrop = true;
+    } else {
+      this.viewDrop = false;
+      this.query = ''
+    }
+  }
 
   /**
    * openEditer open the input field and the submit and cancel buttons
@@ -97,22 +132,23 @@ export class AddCommentComponent {
    * @memberof AddCommentComponent
    */
   addUser(user: IUserList): void {
-    if(user && user.name) {
-      this.inputValue = `${this.inputValue}${user.name}`
-
-      // If the user list doesn't already include this user, add it to the array
-      if(!this.atUsers.find(testUser => testUser.name === user.name)) {
-        this.atUsers.push({
-          name: user.name,
-          userID: user.userID
-        })
+    this.tokenValue = this.inputValue.split(' ');
+    this.userValues = this.userLookupService.getUsers();
+    // Check for each user and add to the list
+    this.tokenValue.forEach((token, index) => {
+      // Replace
+      if(token.startsWith("@") && !this.userValues.find(testUser => testUser.name ===  token.substring(1))) {
+        this.tokenValue[index] = `@${user.name}`;
+        if(!this.atUsers.find(testUser => testUser.name === user.name)) {
+          this.atUsers.push({
+            name: user.name,
+            userID: user.userID
+          })
+        };
+        this.inputValue = this.tokenValue.join(' ');
       }
-    } else {
-      //Remove the @ from the input if the user closes the dropdown before picking a user
-      this.inputValue = this.inputValue.slice(0, -1);
-    }
-
-    this.submitDisabled = false;
+    })
+    this.viewDrop = false;
     // Focus on the message input
     setTimeout(()=>{
       this.inputElement?.nativeElement.focus();
@@ -127,11 +163,6 @@ export class AddCommentComponent {
    */
   updateMessage(event: Event ): void {  
     this.inputValue = (event.target as HTMLInputElement).value;
-
-    // check to see if the last character is a @ trigger
-    if(this.inputValue === '@' || this.inputValue.endsWith(' @')) {
-      this.submitDisabled = true;
-      this.userValues = this.userLookupService.getUsers();
-    }
+    this._checkValue();
   }
 }

@@ -17,7 +17,7 @@
             Add Comment
         </button>
     </div>
-    <div class="user-dropdown-container" *ngIf="submitDisabled">
-        <app-user-dropdown [users]="userValues" (selectUser)="addUser($event)"></app-user-dropdown>
+    <div class="user-dropdown-container" *ngIf="viewDrop">
+        <app-user-dropdown [users]="userValues" [query]="query" (selectUser)="addUser($event)"></app-user-dropdown>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { IUserList } from '../shared/interfaces';
 
@@ -13,40 +13,26 @@ import { IUserList } from '../shared/interfaces';
   templateUrl: './user-dropdown.component.html',
   styleUrls: [ './user-dropdown.component.css' ]
 })
-export class UserDropdownComponent implements AfterViewInit {
+export class UserDropdownComponent {
   faUser = faUser
   activeIndex = 0;
+  filteredUsers: IUserList[] = [];
 
   // Setup element refs on the dropdown menu
   @ViewChildren("listItems") listItems: QueryList<ElementRef> | undefined;
 
   @Input() users: IUserList[] = [];
 
+  @Input() query = '';
+
   @Output()
   selectUser: EventEmitter<IUserList>;
-
-  ngAfterViewInit() {
-    // After the render set the focus on the first item in the list
-    if (this.listItems) {
-      this.listItems.forEach((item, index) => {
-        if(index === this.activeIndex) {
-          item.nativeElement.focus()
-        }
-      });
-    }
-  }
   
   constructor(private menuRef: ElementRef) {
     this.selectUser = new EventEmitter();
   }
 
-  // If click anywhere outside the menu, close the menu
-  @HostListener('document:click', ['$event'])
-  clickout(event: MouseEvent) {
-    if(!this.menuRef.nativeElement.contains(event.target)) {
-      this.selectUser.emit();
-    }
-  }
+  
 
   /**
    * onClick is used to select a user clicked in the dropdown menu

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IUserList } from '../shared/interfaces';
 
 /**
    * NotificationService
@@ -16,9 +15,9 @@ export class NotificationService {
    * @param {string} message
    * @memberof AppComponent
    */
-  notifyUser(user: IUserList, message: string) {
+  notifyUser(users: string[], message: string) {
     setTimeout(function(){
-      alert(`Calling User: ID:${user.userID} Name:${user.name} Message:${message}`);
+      alert(`Calling User: User Name: ${users} Message:${message}`);
     }, 1000);
   }
 } 
